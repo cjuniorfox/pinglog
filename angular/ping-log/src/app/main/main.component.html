@@ -1,0 +1,33 @@
+<div>
+    <div class="current-status" [ngClass]="getStatusClass(currentStatus)">
+        <ul *ngIf="currentStatus">
+            <li>
+                <p class="status">Status: {{ currentStatus.status }}</p>
+            </li>
+            <li>
+                <p class="interval">Interval: {{ currentStatus.interval }}</p>
+            </li>
+            <li>
+                <p class="">Server: {{ currentStatus.address }}</p>
+            </li>
+            <li>
+                <p class="">Time: {{ currentStatus.time | date:'dd/MM/yyyy (HH:mm:ss)'}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="log">
+    <ul *ngIf="logStatus">
+        <li *ngFor="let s of logStatus" >
+            <div [ngClass]="getStatusClass(s)">
+            <span *ngIf="s.status == 'ok'">Response from {{ s.address }} at {{ s.time | date:'HH:mm:ss' }} </span>
+            <span *ngIf="s.status == 'estabilished'">Connection estabilished with {{ s.address }} at
+                {{ s.time | date:'HH:mm:ss' }}. Test interval switched to {{ s.interval }} seconds </span>
+            <span *ngIf="s.status == 'timeout'">Timeut connecting with {{ s.address }} at {{ s.time | date:'HH:mm:ss' }}
+            </span>
+            <span *ngIf="s.status == 'lost'">Connection lost with {{ s.address }} at {{ s.time | date:'HH:mm:ss' }}.
+                Test interval switched to {{s.interval}} </span>
+            </div>
+        </li>
+    </ul>
+</div>

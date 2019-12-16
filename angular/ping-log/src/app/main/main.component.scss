@@ -1,0 +1,64 @@
+.current-status{
+    margin: .3rem;
+    font-size: 0.8rem;
+    position:fixed;
+    opacity: 30%;
+    right: 0;
+    bottom: 0;
+    ul {
+        list-style-type: none;
+        margin: 0;
+        display: flex;
+        li {
+            padding: 0 1em;
+        }
+    }
+}
+
+.current-status:hover{
+    opacity: 100%;
+}
+
+.status-ok{
+    background-color: rgb(10,200,30);
+}
+
+.status-fail{
+    background-color: rgb(200,0,30);
+    font-weight: bold;
+    color: white;
+}
+
+.log{
+    ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    
+        li{
+            background: rgb(238, 238, 238);
+            padding: 1em;
+            margin-right: 10px;
+            width: 20%;
+            height: 5em;
+            margin-bottom: 1em;
+            display: flex;
+            flex-direction: column;
+        }
+        p {
+            margin: 0;
+        }
+    
+        p.name{
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        p.country{
+            text-transform: uppercase;
+            font-size: .9rem;
+            flex-grow: 1;
+        }
+    }
+}

@@ -57,7 +57,6 @@ function nameFiles(){
 	while [[ -f $errorDir/$errorFile  && $( wc -c $errorDir/$errorFile | awk '{ print $1 }' ) -gt $maxBytes ]] ; do
 		errorFileCount=$(($errorFileCount+1));
 		errorFile="log_$(printf "%08d\n" $errorFileCount).json";
-		echo errorFile;
 	done;
 }
 
@@ -76,31 +75,24 @@ loopLog(){
 		template="{\"status\":\"%STATUS\",\"interval\":\"%INTERVAL\",\"address\":\"$IP\",\"time\":\"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\"}";
 		nameFiles;
 		createLogJson;
-		s='';
 		response=$(ping -c 1 -W 1 $IP); 
 		if ! [[ "$response" =~ " 0%" ]]; then
-			if [[ "$c" != "0" ]]; then
-				seconds=2;
+			seconds=2;
+			if [[ "$s" != "lost" ]] && [[ "$s" != "timeout" ]]; then
 				s="lost";
-				 #Connection lost for the first time
-					#	tee -a $logDir/$file | tee -a $errorDir/$errorFile;
 			else
-				c=0; #Error connection log
 				s="timeout";
-				#	tee -a $logDir/$file | tee -a $errorDir/$errorFile;
 			fi;
+			c=0;
 		else  #Connection restabilished
 			seconds=30;
-			if [[ "$c" == "0" ]]; then
+			if [[ "$s" != "ok" ]] && [[ "$s" != "estabilished" ]]; then
 				
 				s="estabilished";
-				#	tee -a $logDir/$file | tee -a $errorDir/$errorFile;
 			else
 				 #connection ok
 				s="ok";
-				#	tee -a $logDir/$file;
 			fi;
-			c=$((c+1));
 		fi;
 		
 		json=$(echo $template | sed "s/%STATUS/$s/" | sed "s/%INTERVAL/$seconds/" | tee "$dir/status.json");

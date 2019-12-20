@@ -31,7 +31,7 @@ function createLogJson(){
 	done;
 	echo "[$list]" | sed "s|$dir|\.|g" > $dir/log.json
 	list="";
-	if [ ! -f $errorDir/$file ]; then
+	if [ ! -f $errorDir/$errorFile ]; then
 		return;
 	fi;
 	for f in $errorDir/*.json; do 
@@ -41,7 +41,7 @@ function createLogJson(){
 			list=$list", \"$f\" ";
 		fi;
 	done;
-	echo "{\"files\":[$list]}" | sed "s|$dir|\.|g" > $dir/error.json
+	echo "[$list]" | sed "s|$dir|\.|g" > $dir/error.json
 }
 
 function nameFiles(){

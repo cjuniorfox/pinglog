@@ -25,14 +25,14 @@ export class MainComponent implements OnInit {
     }, 5000);
   }
   getLogStatus() {
-    let logs = 10;
+    let logs = 4;
     //Obtem lista de arquivos
     this._http.getFileList().subscribe(data => {
       let files = data;
       let l : Status[];
       //Após isso, recebe os dois últimos arquivos
       let c = 0;
-      for (let i = (files.length < logs ? 0 : files.length - logs - 1); i < files.length; i++) {
+      for (let i = (files.length < logs ? 0 : files.length - logs ); i < files.length; i++) {
         this._http.getLogFile(files[i]).subscribe(data => {
           if (c == 0) {
             l = data;
@@ -40,7 +40,7 @@ export class MainComponent implements OnInit {
             l = l.concat(data);
           }
           c = +1;
-          if (i == files.length - 1){
+          if (i == files.length - 1 && this.logStatus != l.reverse()){
             this.logStatus = l;
           }
         });
@@ -55,11 +55,16 @@ export class MainComponent implements OnInit {
   }
 
   getStatusClass(status:Status) {
-    if (status && status.status == "ok") {
-      return "status-ok";
-    } else {
-      return "status-fail";
-    };
+    switch (status.status){
+      case "ok":
+        return "status-ok";
+        break;
+      case "timeout":
+        return "status-fail";
+        break;
+      default :
+        return "status-attention";
+        break; 
+    }
   }
-
 }

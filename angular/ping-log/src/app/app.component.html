@@ -1,15 +1,12 @@
-<header>
-  <div class="container">
-    <a href="#" class="logo">PingLog!</a>
-    <nav>
-      <ul>
-        <li><a href="#" routerLink="/">Main</a></li>
-        <li><a href="#" routerLink="/browse-files">Browse files</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<mat-toolbar color="primary" class="app-toolbar mat-elevation-z6">
+  <span>PingLog!</span>
+  <span class="fill-remaining-space"></span>
+  <mat-slide-toggle (change)="errorFile($event.checked)">
+  </mat-slide-toggle>
+  <button mat-button routerLink="/">Main</button>
+  <button mat-button routerLink="/browse-files">Browse files</button>
+</mat-toolbar>
 
-<div class="container">
+<div class="content">
   <router-outlet></router-outlet>
 </div>

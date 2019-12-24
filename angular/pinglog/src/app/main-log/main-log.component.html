@@ -1,0 +1,24 @@
+
+<div *ngIf="logStatus"  
+    fxLayoutAlign="center center"
+    fxLayout="row wrap"   
+    class="logContainer" 
+    >
+    <mat-card *ngFor="let s of logStatus"  fxFlex.xs="100%">
+        <mat-card-title><span [ngClass]="getStatusClass(s)">
+                <mat-icon *ngIf="s.status === 'lost' || s.status === 'estabilished'">warning</mat-icon>
+                <mat-icon *ngIf="s.status === 'timeout'">error</mat-icon>
+                <mat-icon *ngIf="s.status === 'ok'">done</mat-icon> 
+            </span>
+            Got {{s.status }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ s.time | date:'HH:mm:ss - (d/M/y)' }}
+        </mat-card-subtitle>
+        <mat-card-content>
+            
+            <p>Server: {{s.address}} <br> interval: {{s.interval}} seconds</p>
+            
+        </mat-card-content>
+    </mat-card>
+</div>

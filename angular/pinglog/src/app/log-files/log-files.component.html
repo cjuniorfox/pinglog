@@ -1,0 +1,27 @@
+<h2>Complete</h2>
+<ul *ngIf="fileList">
+    <li *ngFor="let f of fileList">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <button mat-button mat-line (click)="openFile(f)">
+            {{f.replace('./log/','').replace('.json','')}}
+        </button>
+        <mat-divider></mat-divider>
+    </li>
+</ul>
+<h2>Errors</h2>
+<ul *ngIf="errorFilelist">
+    <li *ngFor="let f of errorFilelist">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <button mat-button mat-line (click)="openFile(f)">
+            {{f.replace('./error/','').replace('.json','')}}
+        </button>
+        <mat-divider></mat-divider>
+    </li>
+</ul>
+
+<h2>Log</h2>
+<ul *ngIf="log">
+    <li *ngFor="let l of log">
+        Got {{l.status}} from {{l.address}} at {{ l.time | date:'HH:mm:ss' }}. Interval {{l.interval}} seconds.
+    </li>
+</ul>

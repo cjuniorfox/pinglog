@@ -1,0 +1,24 @@
+.logContainer {
+  mat-card {
+    margin: 0.5rem;
+    min-width: 15rem;
+    .xs {
+      min-width: 100%;
+    }
+  }
+}
+
+.status-ok {
+  text-transform: capitalize;
+  color: rgb(4, 119, 16);
+}
+.status-attention {
+  text-transform: capitalize;
+
+  color: rgb(204, 150, 0);
+}
+.status-fail {
+  text-transform: capitalize;
+
+  color: rgb(148, 5, 26);
+}
